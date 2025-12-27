@@ -23,7 +23,7 @@ export class MediaController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-  ) {}
+  ) { }
 
   @Post("/")
   @ApiOperation({ summary: "Upload media file" })
@@ -74,10 +74,10 @@ export class MediaController {
   }
 
   @MessagePattern("media.get_media_by_ids")
-  async getMediaByIds(ids: string): Promise<GetMediaByIdsResponseDto[]> {
+  async getMediaByIds(ids: Uuid[]): Promise<GetMediaByIdsResponseDto[]> {
     return GetMediaByIdsResponseDto.fromDomains(
       await this.queryBus.execute(
-        new GetMediaByIdsQuery(ids.split(",") as Uuid[]),
+        new GetMediaByIdsQuery(ids),
       ),
     );
   }
