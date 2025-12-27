@@ -28,4 +28,4 @@ services:
       TZ: "GMT"
       PGTZ: "GMT"
     ports:
-      - "$DB_PORT:5432"
+      - "5433:5432"
