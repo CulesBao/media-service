@@ -1,0 +1,31 @@
+services:
+  media_backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: media_backend
+    container_name: media_backend
+    env_file:
+      - .env
+    environment:
+      DB_HOST: media_database
+      DB_PORT: 5432
+      RABBITMQ_URL: amqp://media:media@host.docker.internal:5672
+    ports:
+      - "$PORT:$PORT"
+    depends_on:
+      - media_database
+
+  media_database:
+    build: postgres
+    container_name: media_database
+    volumes:
+    - ./postgres:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: $DB_USERNAME
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_MULTIPLE_DATABASES: $DB_DATABASE
+      TZ: "GMT"
+      PGTZ: "GMT"
+    ports:
+      - "$DB_PORT:5432"
