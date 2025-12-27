@@ -25,8 +25,7 @@ export class S3Adapter implements MediaAdapterInterface {
   async getPresignedUrl(
     request: GetPresignedUrlRequestDto,
   ): Promise<GetPresignedUrlResponseDto> {
-    const fileName =
-      crypto.randomUUID() + "_" + request.fileName;
+    const fileName = crypto.randomUUID() + "_" + request.fileName;
 
     const { data, error } = await this.client.storage
       .from(request.bucket)

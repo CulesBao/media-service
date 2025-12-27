@@ -9,8 +9,9 @@ import { CqrsModule } from "@nestjs/cqrs";
 import { MediaAdapterToken } from "./media.token";
 import { CreateMediaCommandHandler } from "./cqrs/commands/handlers/create-media.command.handler";
 import { MediaRepository } from "./repository/media.repository";
+import { GetMediaByIdsQueryHandler } from "./cqrs/queries/handlers/get-media-by-ids.query.handler";
 
-const queryHandlers = [GetPresignedUrlQueryHandler];
+const queryHandlers = [GetPresignedUrlQueryHandler, GetMediaByIdsQueryHandler];
 const commandHandlers = [CreateMediaCommandHandler];
 
 @Module({

@@ -8,9 +8,7 @@ import { Inject } from "@nestjs/common";
 import { MediaAdapterToken } from "modules/media/media.token";
 
 @CommandHandler(CreateMediaCommand)
-export class CreateMediaCommandHandler
-  implements ICommandHandler<CreateMediaCommand>
-{
+export class CreateMediaCommandHandler implements ICommandHandler<CreateMediaCommand> {
   constructor(
     private readonly mediaRepository: MediaRepository,
     @Inject(MediaAdapterToken)

@@ -12,6 +12,10 @@ import { GetPresignedUrlQuery } from "./cqrs/queries/implements/get-presigned-ur
 import { CreateMediaResponseDto } from "./dto/response/create-media.response.dto";
 import { CreateMediaRequestDto } from "./dto/request/create-media.request.dto";
 import { MediaMapper } from "./mapper/media.mapper";
+import { MessagePattern } from "@nestjs/microservices";
+import { Uuid } from "common/types";
+import { GetMediaByIdsResponseDto } from "./dto/response/get-media-by-ids.response.dto";
+import { GetMediaByIdsQuery } from "./cqrs/queries/implements/get-media-by-ids.query";
 
 @Controller("media")
 @ApiTags("Media")
@@ -65,8 +69,15 @@ export class MediaController {
     @Query("bucket") bucket: string,
   ): Promise<GetPresignedUrlResponseDto> {
     return GetPresignedUrlResponseDto.fromDomain(
+      await this.queryBus.execute(new GetPresignedUrlQuery(bucket, fileName)),
+    );
+  }
+
+  @MessagePattern("media.get_media_by_ids")
+  async getMediaByIds(ids: string): Promise<GetMediaByIdsResponseDto[]> {
+    return GetMediaByIdsResponseDto.fromDomains(
       await this.queryBus.execute(
-        new GetPresignedUrlQuery(bucket, fileName),
+        new GetMediaByIdsQuery(ids.split(",") as Uuid[]),
       ),
     );
   }

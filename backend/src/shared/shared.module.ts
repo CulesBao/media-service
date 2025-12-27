@@ -3,9 +3,7 @@ import { Global, Module } from "@nestjs/common";
 
 import { ApiConfigService } from "./services/api-config.service";
 
-const providers: Provider[] = [
-  ApiConfigService,
-];
+const providers: Provider[] = [ApiConfigService];
 
 @Global()
 @Module({
@@ -13,4 +11,4 @@ const providers: Provider[] = [
   imports: [],
   exports: [...providers],
 })
-export class SharedModule { }
+export class SharedModule {}

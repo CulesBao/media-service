@@ -28,4 +28,8 @@ export class Media {
       updatedAt: mediaEntity.updatedAt,
     };
   }
+
+  static fromEntities(mediaEntities: MediaEntity[]): Media[] {
+    return mediaEntities.map(Media.fromEntity);
+  }
 }

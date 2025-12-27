@@ -1,8 +1,5 @@
 export interface MediaAdapterInterface {
-  getPresignedUrl(request: {
-    bucket: string;
-    fileName: string;
-  }): Promise<{
+  getPresignedUrl(request: { bucket: string; fileName: string }): Promise<{
     fileName: string;
     expiredAt: Date;
     presignedUrl: string;

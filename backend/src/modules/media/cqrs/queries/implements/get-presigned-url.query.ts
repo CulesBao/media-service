@@ -4,5 +4,5 @@ export class GetPresignedUrlQuery implements IQuery {
   constructor(
     public readonly bucket: string,
     public readonly fileName: string,
-  ) { }
+  ) {}
 }

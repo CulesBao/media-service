@@ -46,4 +46,4 @@ import { S3Module } from "modules/s3/s3.module";
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}

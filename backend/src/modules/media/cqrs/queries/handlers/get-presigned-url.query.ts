@@ -6,12 +6,11 @@ import { Inject } from "@nestjs/common";
 import { MediaAdapterToken } from "modules/media/media.token";
 
 @QueryHandler(GetPresignedUrlQuery)
-export class GetPresignedUrlQueryHandler
-  implements IQueryHandler<GetPresignedUrlQuery> {
+export class GetPresignedUrlQueryHandler implements IQueryHandler<GetPresignedUrlQuery> {
   constructor(
     @Inject(MediaAdapterToken)
     private readonly mediaAdapterInterface: MediaAdapterInterface,
-  ) { }
+  ) {}
 
   async execute(query: GetPresignedUrlQuery): Promise<GetPresignedUrl> {
     return this.mediaAdapterInterface.getPresignedUrl({
